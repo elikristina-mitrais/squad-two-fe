@@ -3,7 +3,9 @@ const initialState = {
     errorMsgTruckList: '',
     truckDetailList: [],
     errorMsgTruckDetailList: '',
-    addTruckErrorMsg: ''
+
+    addTruckErrorMsg: '',
+    addDriverMsg:''
 };
 
 const transporterReducer = (state = initialState, action) => {
@@ -62,6 +64,20 @@ const transporterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 addTruckErrorMsg: action.payload,
+            };
+        }
+        
+        case 'ADD_DRIVER': {
+            return {
+                ...state,
+                addDriverMsg: action.payload,
+            };
+        }
+
+        case 'ADD_DRIVER_MESSAGE': {
+            return {
+                ...state,
+                addDriverMsg: action.payload,
             };
         }
 
