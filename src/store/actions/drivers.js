@@ -37,3 +37,27 @@ export const getDriverDetail = (id) => {
       }
   };
 };
+
+
+export const editDriver = (driverName, phoneNumber, idCard, driverLicense, id) => {
+  return async (dispatch) => {
+      const params = new URLSearchParams();
+      params.append('driver_name', driverName)
+      params.append('phone_number', phoneNumber)
+      params.append('ktp_upload', idCard)
+      params.append('sim_upload', driverLicense)
+      try {
+          const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/drivers/${id}`);
+          dispatch({
+              type: 'EDIT_DRIVER',
+              payload: results.data.error_msg,
+          });
+      } catch (err) {
+          const { message } = err;
+          dispatch({
+              type: 'EDIT_DRIVER_MESSAGE',
+              payload: message,
+          });
+      }
+  };
+};

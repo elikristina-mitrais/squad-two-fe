@@ -1,6 +1,8 @@
 const initialState = {
   drivers: [],
   errorMsg: '',
+  editDriverErrorMsg: '',
+  editDriverMsg:''
 };
 
 const DriversReducer = (state = initialState, action) => {
@@ -26,6 +28,21 @@ const DriversReducer = (state = initialState, action) => {
         driver: action.payload,
       };
     }
+
+    case 'EDIT_DRIVER': {
+      return {
+          ...state,
+          editDriverMsg: action.payload,
+      };
+  }
+
+  case 'EDIT_DRIVER_MESSAGE': {
+      return {
+          ...state,
+          editDriverErrorMsg: action.payload,
+      };
+  }
+
 
     default: {
       return {

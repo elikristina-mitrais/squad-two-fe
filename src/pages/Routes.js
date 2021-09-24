@@ -12,6 +12,7 @@ import PrivateRoute from '../utils/PrivateRoute';
 import PublicRoute from '../utils/PublicRoute'
 import TruckList from './TruckList';
 import TruckDetails from './TruckDetails';
+import EditDriver from './Driver/EditDriver';
 
 function Routes() {
   return (
@@ -43,6 +44,11 @@ function Routes() {
         path="/trucks/detail/:id"
         exact
         component={TruckDetails}
+      />
+      <Route
+        path="/drivers/update/:id"
+        exact
+        component={EditDriver}
       />
     </Switch>
     </Router>
