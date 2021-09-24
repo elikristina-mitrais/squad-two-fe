@@ -13,7 +13,7 @@ class TruckDetails extends Component {
     }
 
     componentDidMount() {
-        this.props.getTruckListDetail()
+        this.props.getTruckListDetail(this.props.match.params.id)
     }
 
     render() {
