@@ -1,5 +1,5 @@
 const initialState = {
-  staffs: [],
+  drivers: [],
   errorMsg: '',
 };
 

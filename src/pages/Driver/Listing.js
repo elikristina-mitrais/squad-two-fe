@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const { SearchBar } = Search
 
@@ -58,9 +60,9 @@ const columns = [
             console.log(row);
             return (    
                 <div>
-                    <Link to={`/drivers/detail/${row.id}`}><Button className="btn btn-primary">View</Button></Link>
+                    <Link to={`/drivers/detail/${row.id}`}><Button className="btn btn-primary"><FontAwesomeIcon icon={faInfoCircle} /></Button></Link>
                     &nbsp;
-                    <Link to={`/drivers/update/${row.id}`}><Button className="btn btn-secondary">Update</Button></Link>
+                    <Link to={`/drivers/update/${row.id}`}><Button className="btn btn-secondary"><FontAwesomeIcon icon={faEdit} /></Button></Link>
                 </div>
             )
         }
