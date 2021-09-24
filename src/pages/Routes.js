@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Home from './Home'
+import DriverList from './Driver/Index'
 
 function Routes() {
   return (
@@ -10,6 +11,11 @@ function Routes() {
         path="/"
         exact
         component={Home}
+      />
+      <Route
+        path="/drivers"
+        exact
+        component={DriverList}
       />
     </Switch>
   );
