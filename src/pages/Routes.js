@@ -73,6 +73,8 @@ function Routes() {
         exact
         component={EditTruck}
       />
+      
+      <Route
         path="/shipments"
         exact
         component={ShipmentTransporterList}

@@ -41,13 +41,25 @@ export const getDriverDetail = (id) => {
 
 export const editDriver = (driverName, phoneNumber, idCard, driverLicense, id) => {
   return async (dispatch) => {
-      const params = new URLSearchParams();
-      params.append('driver_name', driverName)
-      params.append('phone_number', phoneNumber)
-      params.append('ktp_upload', idCard)
-      params.append('sim_upload', driverLicense)
+      // const params = new URLSearchParams();
+      // params.append('driver_name', driverName)
+      // params.append('phone_number', phoneNumber)
+      // params.append('ktp_upload', idCard)
+      // params.append('sim_upload', driverLicense)
+
+      const payload = {
+        'driver': {
+                  'driver_name': driverName,
+                  'phone_number': phoneNumber,
+                  'ktp_upload': idCard,
+                  'sim_upload': driverLicense
+              }
+      }
+      const headers = {
+        'Content-Type': 'application/json',
+      }
       try {
-          const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/drivers/${id}`);
+          const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/drivers/${id}`, payload, headers);
           dispatch({
               type: 'EDIT_DRIVER',
               payload: results.data.error_msg,

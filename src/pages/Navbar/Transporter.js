@@ -15,7 +15,7 @@ class NavbarTransporter extends Component {
                     <Link className="nav-link" to={"/"}>LMS |</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/shipments/transporter"}>Shipments</Link>
+                    <Link className="nav-link" to={"/transporters"}>Shipments</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to={"/trucks"}>Trucks</Link>

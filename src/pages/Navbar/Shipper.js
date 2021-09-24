@@ -15,7 +15,7 @@ class NavbarShipper extends Component {
                     <Link className="nav-link" to={"/"}>LMS |</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={"/shipments/shipper"}>Shipments</Link>
+                    <Link className="nav-link" to={"/shipments"}>Shipments</Link>
                 </li>
             </ul>
         )
