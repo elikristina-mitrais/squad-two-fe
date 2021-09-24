@@ -2,10 +2,11 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 
 import history from "../utils/history";
-import Home from './Home'
-import Login from './Login'
+import Home from './Home';
+import Login from './Login';
 import PrivateRoute from '../utils/PrivateRoute';
-import PublicRoute from '../utils/PublicRoute'
+import PublicRoute from '../utils/PublicRoute';
+import AddDriver from './Drivers/AddDriver';
 
 function Routes() {
   return (
@@ -17,6 +18,11 @@ function Routes() {
         path="/home"
         exact
         component={Home}
+      />
+      <PrivateRoute 
+        path="/drivers/new"
+        exact
+        component={AddDriver}
       />
       
     </Switch>
