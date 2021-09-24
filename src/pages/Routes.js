@@ -8,6 +8,7 @@ import DriverList from './Driver/Index'
 import DriverDetail from './Driver/Detail'
 import AddDriver from './Drivers/AddDriver';
 
+
 import Login from './Login'
 import PrivateRoute from '../utils/PrivateRoute';
 import PublicRoute from '../utils/PublicRoute'
@@ -16,6 +17,7 @@ import TruckDetails from './TruckDetails';
 import EditDriver from './Driver/EditDriver';
 import TruckDetails from './TruckDetails'
 import AddTruck from './AddTruck';
+import EditTruck from './EditTruck';
 import ShipmentTransporterList from './Shipment/Index'
 
 function Routes() {
@@ -68,6 +70,10 @@ function Routes() {
         component={AddTruck}
       />
       <Route
+        path="/trucks/update/:id"
+        exact
+        component={EditTruck}
+      />
         path="/shipments"
         exact
         component={ShipmentTransporterList}

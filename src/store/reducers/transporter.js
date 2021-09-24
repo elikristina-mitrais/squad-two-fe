@@ -53,6 +53,20 @@ const transporterReducer = (state = initialState, action) => {
             };
         }
 
+        case 'EDIT_TRUCK': {
+            return {
+                ...state,
+                addTruckErrorMsg: action.payload,
+            };
+        }
+
+        case 'EDIT_TRUCK_MESSAGE': {
+            return {
+                ...state,
+                addTruckErrorMsg: action.payload,
+            };
+        }
+        
         case 'ADD_DRIVER': {
             return {
                 ...state,
