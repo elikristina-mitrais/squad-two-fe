@@ -42,28 +42,28 @@ class EditTruck extends Component {
                 <Form>
                   <Form.Group className="my-5">
                     <Form.Label>License Number</Form.Label>
-                    <Form.Control name="licenseNumber" onChange={(event) => this.changeText(event)} type="text" placeholder="" />
+                    <Form.Control name="licenseNumber" onChange={(event) => this.changeText(event)} type="text" placeholder={this.props.truckList[this.props.match.params.id - 1].license_number} />
                   </Form.Group>
                   <Form.Group className="my-5">
                     <Form.Label>Truck Type</Form.Label>
                     <select className="form-control" name="truckType" onChange={this.changeText}>
-                      <option selected>Select truck type</option>
+                      <option selected>{this.props.truckList[this.props.match.params.id - 1].truck_type}</option>
                       <option value="Tronton">Tronton</option>
                       <option value="Container">Container</option>
                       <option value="CDE">CDE</option>
                     </select>
                   </Form.Group>
                   <Form.Group className="my-5">
-                    <Form.Label>Plate Type</Form.Label>
+                    <Form.Label>Plate type</Form.Label>
                     <select className="form-control" name="plateType" onChange={this.changeText}>
-                      <option selected>Select plate type</option>
+                      <option selected>{this.props.truckList[this.props.match.params.id - 1].plate_type}</option>
                       <option value="Black">Black</option>
                       <option value="Yellow">Yellow</option>
                     </select>
                   </Form.Group>
                   <Form.Group className="my-5">
                     <Form.Label>Production Year</Form.Label>
-                    <Form.Control name="productionYear" onChange={(event) => this.changeText(event)} type="text" placeholder="Optional" />
+                    <Form.Control name="productionYear" onChange={(event) => this.changeText(event)} type="text" placeholder={this.props.truckList[this.props.match.params.id - 1].production_year} />
                   </Form.Group>
                   <Form.Group className="my-5">
                     <Form.Label>STNK (Optional)</Form.Label>
@@ -95,6 +95,10 @@ class EditTruck extends Component {
   }
 }
 
+const mapStateToProps = state => (
+  { truckList: state.transporter.truckList }
+)
+
 const mapDispatchToProps = { editTruck }
 
-export default connect(null, mapDispatchToProps)(EditTruck)
+export default connect(mapStateToProps, mapDispatchToProps)(EditTruck)
