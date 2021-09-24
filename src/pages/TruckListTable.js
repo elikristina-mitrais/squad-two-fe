@@ -53,6 +53,15 @@ const columns = [
             color: '#fff',
             textAlign: 'center'
         },
+    }, {
+        dataField: 'status',
+        text: 'Status',
+        sort: true,
+        headerStyle: {
+            backgroundColor: '#e17055',
+            color: '#fff',
+            textAlign: 'center'
+        },
     },
     {
         dataField: 'link',
