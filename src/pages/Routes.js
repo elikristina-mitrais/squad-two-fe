@@ -12,7 +12,8 @@ import Login from './Login'
 import PrivateRoute from '../utils/PrivateRoute';
 import PublicRoute from '../utils/PublicRoute'
 import TruckList from './TruckList';
-import TruckDetails from './TruckDetails';
+import TruckDetails from './TruckDetails'
+import AddTruck from './AddTruck';
 
 import ShipmentTransporterList from './Shipment/Index'
 
@@ -55,6 +56,11 @@ function Routes() {
         component={TruckDetails}
       />
 
+      <Route
+        path="/trucks/new"
+        exact
+        component={AddTruck}
+      />
       <Route
         path="/shipments"
         exact

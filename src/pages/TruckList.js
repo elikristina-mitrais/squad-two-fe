@@ -3,6 +3,8 @@ import { Container, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { getTruckList } from '../store/actions/transporter'
 import TruckListTable from './TruckListTable';
+import { Link } from "react-router-dom";
+
 
 class TruckList extends Component {
     constructor(props) {
@@ -19,7 +21,9 @@ class TruckList extends Component {
         return (
             <React.Fragment>
                 <Container className="shadow-lg p-3 mt-4 mb-5 bg-white rounded">
-                    <Button style={{ backgroundColor: '#e17055', borderColor: '#e17055', float: 'right', marginRight: '12px' }}>Add new truck</Button>
+                    <Link to={"/trucks/new"}>
+                        <Button style={{ backgroundColor: '#e17055', borderColor: '#e17055', float: 'right', marginRight: '12px' }}>Add new truck</Button>
+                    </Link>
                     <TruckListTable users={this.props.truckList} />
                 </Container>
             </React.Fragment>

@@ -3,6 +3,7 @@ const initialState = {
     errorMsgTruckList: '',
     truckDetailList: [],
     errorMsgTruckDetailList: '',
+
     addTruckErrorMsg: '',
     addDriverMsg:''
 };

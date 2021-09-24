@@ -36,3 +36,37 @@ export const getTruckListDetail = (id) => {
         }
     };
 };
+
+export const addNewTruck = (licenseNumber, truckType, plateType, productionYear, stnk, kir) => {
+    return async (dispatch) => {
+        
+        const payload = {
+			'truck': {
+                'license_number': licenseNumber,
+                'truck_type': truckType,
+                'plate_type': plateType,
+                'production_year': productionYear,
+                'stnk_upload': stnk,
+                'kir_upload': kir
+            }
+		}
+		const headers = {
+			'Content-Type': 'application/json',
+		}
+        try {
+            const results = await axios.post(`${process.env.REACT_APP_SERVER_URL}/trucks`, payload, headers);
+            console.log('ini pesannya ndra')
+            console.log(results)
+            dispatch({
+                type: 'ADD_TRUCK',
+                payload: results.data.error_msg,
+            });
+        } catch (err) {
+            const { message } = err;
+            dispatch({
+                type: 'ADD_TRUCK_MESSAGE',
+                payload: message,
+            });
+        }
+    };
+};
