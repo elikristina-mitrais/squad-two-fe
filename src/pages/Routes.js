@@ -14,6 +14,8 @@ import PublicRoute from '../utils/PublicRoute'
 import TruckList from './TruckList';
 import TruckDetails from './TruckDetails';
 
+import ShipmentTransporterList from './Shipment/Index'
+
 function Routes() {
   return (
     <Router history={history}>
@@ -51,6 +53,12 @@ function Routes() {
         path="/trucks/detail/:id"
         exact
         component={TruckDetails}
+      />
+
+      <Route
+        path="/shipments"
+        exact
+        component={ShipmentTransporterList}
       />
 
     </Switch>
