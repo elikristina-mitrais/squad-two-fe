@@ -39,15 +39,22 @@ export const getTruckListDetail = (id) => {
 
 export const addNewTruck = (licenseNumber, truckType, plateType, productionYear, stnk, kir) => {
     return async (dispatch) => {
-        const params = new URLSearchParams();
-        params.append('license_number', licenseNumber)
-        params.append('truck_type', truckType)
-        params.append('plate_type', plateType)
-        params.append('production_year', productionYear)
-        params.append('stnk_upload', stnk)
-        params.append('kir_upload', kir)
+        
+        const payload = {
+			'truck': {
+                'license_number': licenseNumber,
+                'truck_type': truckType,
+                'plate_type': plateType,
+                'production_year': productionYear,
+                'stnk_upload': stnk,
+                'kir_upload': kir
+            }
+		}
+		const headers = {
+			'Content-Type': 'application/json',
+		}
         try {
-            const results = await axios.post(`${process.env.REACT_APP_SERVER_URL}/trucks`);
+            const results = await axios.post(`${process.env.REACT_APP_SERVER_URL}/trucks`, payload, headers);
             console.log('ini pesannya ndra')
             console.log(results)
             dispatch({
