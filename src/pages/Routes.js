@@ -6,6 +6,7 @@ import Home from './Home'
 
 import DriverList from './Driver/Index'
 import DriverDetail from './Driver/Detail'
+import AddDriver from './Drivers/AddDriver';
 
 import Login from './Login'
 import PrivateRoute from '../utils/PrivateRoute';
@@ -24,6 +25,13 @@ function Routes() {
         exact
         component={Home}
       />
+
+      <PrivateRoute 
+        path="/drivers/new"
+        exact
+        component={AddDriver}
+      />
+      
       <Route
         path="/drivers"
         exact
@@ -44,6 +52,7 @@ function Routes() {
         exact
         component={TruckDetails}
       />
+
     </Switch>
     </Router>
   );
