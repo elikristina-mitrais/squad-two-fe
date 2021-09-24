@@ -14,7 +14,6 @@ import PublicRoute from '../utils/PublicRoute'
 import TruckList from './TruckList';
 import TruckDetails from './TruckDetails';
 import EditDriver from './Driver/EditDriver';
-import TruckDetails from './TruckDetails'
 import AddTruck from './AddTruck';
 import ShipmentTransporterList from './Shipment/Index'
 
