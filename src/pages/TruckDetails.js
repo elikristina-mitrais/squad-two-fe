@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getTruckListDetail } from '../store/actions/transporter'
 import style from '../assets/css/TruckDetails.module.css'
@@ -12,7 +13,7 @@ class TruckDetails extends Component {
     }
 
     componentDidMount() {
-        this.props.getTruckListDetail()
+        this.props.getTruckListDetail(this.props.match.params.id)
     }
 
     render() {
@@ -31,6 +32,9 @@ class TruckDetails extends Component {
                             <p><b>Plate type:</b> {this.props.truckDetailList.plate_type}</p>
                             <p><b>Production year:</b> {this.props.truckDetailList.production_year}</p>
                             <p><b>Status:</b> {this.props.truckDetailList.status}</p>
+                            <Link to={"/trucks"}>
+                                <Button className={style.cancelButton} variant="secondary">Back to truck list</Button>
+                            </Link>
                         </div>
                     </Col>
                     <Col>

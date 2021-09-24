@@ -1,25 +1,29 @@
 import React from 'react'
 import { Container } from 'react-bootstrap';
+import { Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faCheck, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap'
-
+import { faInfoCircle, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const { SearchBar } = Search
 
-const defaultSorted = [{
-    dataField: 'id',
-    order: 'asc'
-}];
-
 const columns = [
     {
-        dataField: 'license_number',
-        text: 'Licence Number',
+        dataField: 'driver_name',
+        text: 'Driver Name',
+        sort: true,
+        headerStyle: {
+            width: '10%',
+            backgroundColor: '#e17055',
+            color: '#fff',
+            textAlign: 'center'
+        },
+    }, {
+        dataField: 'phone_number',
+        text: 'Phone Number',
         sort: true,
         headerStyle: {
             backgroundColor: '#e17055',
@@ -27,8 +31,8 @@ const columns = [
             textAlign: 'center'
         },
     }, {
-        dataField: 'truck_type',
-        text: 'Truck Type',
+        dataField: 'created_at',
+        text: 'Created At',
         sort: true,
         headerStyle: {
             backgroundColor: '#e17055',
@@ -36,63 +40,40 @@ const columns = [
             textAlign: 'center'
         },
     }, {
-        dataField: 'plate_type',
-        text: 'Plate Type',
-        sort: true,
-        headerStyle: {
-            backgroundColor: '#e17055',
-            color: '#fff',
-            textAlign: 'center'
-        },
+      dataField: 'status',
+      text: 'Status',
+      sort: true,
+      headerStyle: {
+          backgroundColor: '#e17055',
+          color: '#fff',
+          textAlign: 'center'
+      },
     }, {
-        dataField: 'production_year',
-        text: 'Production Year',
-        sort: true,
-        headerStyle: {
-            backgroundColor: '#e17055',
-            color: '#fff',
-            textAlign: 'center'
-        },
-    }, {
-        dataField: 'status',
-        text: 'Status',
-        sort: true,
-        headerStyle: {
-            backgroundColor: '#e17055',
-            color: '#fff',
-            textAlign: 'center'
-        },
-    },
-    {
-        dataField: 'link',
         text: 'Action',
+        sort: false,
         headerStyle: {
             backgroundColor: '#e17055',
             color: '#fff',
             textAlign: 'center'
         },
         formatter: (rowContent, row) => {
-            return (
+            console.log(row);
+            return (    
                 <div>
-                    <Link to={"trucks/detail/" + row.id}>
-                        <Button className="mr-2" variant='secondary'>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                        </Button>
-                    </Link>
-                    <Link to={"trucks/update/" + row.id}>
-                        <Button className="m-2" variant='secondary'>
-                            <FontAwesomeIcon icon={faEdit} />
-                        </Button>
-                    </Link>
-                    <Button variant='secondary'>
-                        <FontAwesomeIcon icon={faCheck} />
-                    </Button>
+                    <Link to={`/drivers/detail/${row.id}`}><Button className="btn btn-primary"><FontAwesomeIcon icon={faInfoCircle} /></Button></Link>
+                    &nbsp;
+                    <Link to={`/drivers/update/${row.id}`}><Button className="btn btn-secondary"><FontAwesomeIcon icon={faEdit} /></Button></Link>
                 </div>
             )
         }
     }];
 
-const TruckListTable = (props) => {
+const defaultSorted = [{
+    dataField: 'id',
+    order: 'asc'
+}];
+
+const DriverListing = (props) => {
     return (
         <Container>
             <ToolkitProvider
@@ -102,7 +83,7 @@ const TruckListTable = (props) => {
                 {
                     props => (
                         <div>
-                            <div>
+                            <div className="float-right">
                                 <SearchBar {...props.searchProps} className="color-grep my-3" placeholder="Search .." />
                             </div>
                             <BootstrapTable
@@ -116,4 +97,4 @@ const TruckListTable = (props) => {
     )
 }
 
-export default TruckListTable
+export default DriverListing
