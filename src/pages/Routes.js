@@ -6,6 +6,8 @@ import Home from './Home'
 import Login from './Login'
 import PrivateRoute from '../utils/PrivateRoute';
 import PublicRoute from '../utils/PublicRoute'
+import TruckList from './TruckList';
+import TruckDetails from './TruckDetails';
 
 function Routes() {
   return (
@@ -18,7 +20,16 @@ function Routes() {
         exact
         component={Home}
       />
-      
+      <Route
+        path="/trucks"
+        exact
+        component={TruckList}
+      />
+      <Route
+        path="/trucks/detail/:id"
+        exact
+        component={TruckDetails}
+      />
     </Switch>
     </Router>
   );
