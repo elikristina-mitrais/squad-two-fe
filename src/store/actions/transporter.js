@@ -18,13 +18,14 @@ export const getTruckList = () => {
     };
 };
 
-export const getTruckListDetails = (id) => {
+export const getTruckListDetail = (id) => {
     return async (dispatch) => {
         try {
-            const results = await axios.get(`${process.env.REACT_APP_SERVER_URL}/lists/${id}`);
+            const results = await axios.get(`${process.env.REACT_APP_SERVER_URL}/trucks/${id}`);
+            console.log(results)
             dispatch({
                 type: 'GET_TRUCK_LIST_DETAILS',
-                payload: results.data.data.list,
+                payload: results.data.data.truck,
             });
         } catch (err) {
             const { message } = err;
