@@ -7,7 +7,7 @@ body {
   background: #FFFFFF !important;
   min-height: 100vh;
   display: flex;
-  font-weight: 400;
+  font-weight: 200;
   font-family: 'Fira Sans', sans-serif;
 }
 
@@ -70,4 +70,8 @@ body, html, .App, #root, .auth-wrapper {
 
 .forgot-password a {
   color: #167bff;
+}
+
+.row > img {
+  width: 10% !important;
 }

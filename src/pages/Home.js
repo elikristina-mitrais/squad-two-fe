@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
+import Navbar from '../components/Navbar'
 
 class Home extends Component {
     constructor(props) {
@@ -8,11 +10,15 @@ class Home extends Component {
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <h1 className="text-center mt-3">Welcome, Squad Two Here</h1>
-            </React.Fragment >
-        )
+        if (this.state.role === '') {
+            return <Redirect to='/' />;
+        } else {
+            return (
+                <React.Fragment>
+                    <Navbar />
+                </React.Fragment >
+            )
+        }
     }
 }
 
