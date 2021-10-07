@@ -38,69 +38,10 @@ export const getTruckDetail = (id) => {
   };
 };
 
-export const updateTruckStatus = (id) => {
-  return async (dispatch) => {
-    const payload = {
-			'truck': {        
-        'status': 'Inactive'
-      }
-		}
-		
-    const headers = {
-			'Content-Type': 'application/json',
-		}
-
-    try {
-      const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/trucks/${id}`, payload, headers);
-      dispatch({
-        type: 'UPDATE_TRUCK_STATUS',
-        payload: results.data,
-      });
-    } catch (err) {
-      console.log(err);
-      const { message } = err;
-      dispatch({
-        type: 'UPDATE_TRUCK_STATUS_MESSAGE',
-        payload: message,
-      });
-    }
-  };
-}
-
 export const addNewTruck = (payload, headers) => {
-  return async (dispatch) => {
-    try {
-      const results = await axios.post(`${process.env.REACT_APP_SERVER_URL}/trucks`, payload, headers);
-      dispatch({
-        type: 'ADD_TRUCK',
-        payload: results.data,
-      });
-    } catch (err) {
-      console.log(err);
-      const { message } = err;
-      dispatch({
-        type: 'ADD_TRUCK_MESSAGE',
-        payload: message,
-      });
-    }
-  };
+  return axios.post(`${process.env.REACT_APP_SERVER_URL}/trucks`, payload, headers);
 }
 
 export const updateTruckData = (id, payload, headers) => {
-  return async (dispatch) => {
-    try {
-      const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/trucks/${id}`, payload, headers);
-      dispatch({
-        type: 'UPDATE_TRUCK',
-        payload: results.data,
-      });
-    } catch (err) {
-      console.log(err);
-      const { message } = err;
-      dispatch({
-        type: 'UPDATE_TRUCK_MESSAGE',
-        payload: message,
-      });
-    }
-  };
+  return axios.put(`${process.env.REACT_APP_SERVER_URL}/trucks/${id}`, payload, headers);
 }

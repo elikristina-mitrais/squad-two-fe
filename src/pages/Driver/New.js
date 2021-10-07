@@ -19,18 +19,49 @@ class DriverNew extends Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
     const payload = {
-			'driver_name': this.state.driver_name,
-			'phone_number': this.state.phone_number,
-      'ktp_upload': this.state.ktp_upload,
-      'sim_upload': this.state.sim_upload
+      'driver': {
+        'driver_name': this.state.driver_name,
+        'phone_number': this.state.phone_number,
+        'ktp_upload': this.state.ktp_upload,
+        'sim_upload': this.state.sim_upload
+      }
 		}
 
     const headers = {
 			'Content-Type': 'application/json',
 		}
 
-    addNewDriver(payload, headers)
-    history.push('/drivers')
+    addNewDriver(payload, headers).then(res => {
+      if (res.status === 201 && res.data.error === 0) {
+        history.push('/drivers')
+      } else {
+        console.log('there error when added data')
+      }
+    });
+  }
+
+  handleFileRead = async(ev) => {
+    const file = ev.target.files[0]
+    const base64 = await this.convertBase64(file)
+
+    if (ev.target.name === 'ktp_upload') {
+      this.setState({ktp_upload: base64})
+    } else if (ev.target.name === 'sim_upload') {
+      this.setState({sim_upload: base64})
+    }
+  }
+
+  convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file)
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
   }
 
   render() {
@@ -68,8 +99,8 @@ class DriverNew extends Component {
                     name="ktp_upload"
                     type="file"
                     className="form-control"
-                    accept=".jpg,.jpeg,.png,.gif"
-                    onChange={e => this.setState({ktp_upload: e.target.value})} />
+                    inputProps={{ accept: 'image/*' }}
+                    onChange={e => this.handleFileRead(e)} />
                 </Col>
             </Form.Group>
             <Form.Group className="form-group row mt-3">
@@ -79,8 +110,8 @@ class DriverNew extends Component {
                     name="sim_upload"
                     type="file"
                     className="form-control"
-                    accept=".jpg,.jpeg,.png,.gif"
-                    onChange={e => this.setState({sim_upload: e.target.value})} />
+                    inputProps={{ accept: 'image/*' }}
+                    onChange={e => this.handleFileRead(e)} />
                 </Col>
             </Form.Group>
             <Row className="card-footer mt-3">

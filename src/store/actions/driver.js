@@ -38,69 +38,10 @@ export const getDriverDetail = (id) => {
   };
 };
 
-export const updateDriverStatus = (id) => {
-  return async (dispatch) => {
-    const payload = {
-			'driver': {        
-        'status': 'Inactive'
-      }
-		}
-		
-    const headers = {
-			'Content-Type': 'application/json',
-		}
-
-    try {
-      const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/drivers/${id}`, payload, headers);
-      dispatch({
-        type: 'UPDATE_DRIVER_STATUS',
-        payload: results.data,
-      });
-    } catch (err) {
-      console.log(err);
-      const { message } = err;
-      dispatch({
-        type: 'UPDATE_DRIVER_STATUS_MESSAGE',
-        payload: message,
-      });
-    }
-  };
-}
-
 export const addNewDriver = (payload, headers) => {
-  return async (dispatch) => {
-    try {
-      const results = await axios.post(`${process.env.REACT_APP_SERVER_URL}/drivers`, payload, headers);
-      dispatch({
-        type: 'ADD_DRIVER',
-        payload: results.data,
-      });
-    } catch (err) {
-      console.log(err);
-      const { message } = err;
-      dispatch({
-        type: 'ADD_DRIVER_MESSAGE',
-        payload: message,
-      });
-    }
-  };
+  return axios.post(`${process.env.REACT_APP_SERVER_URL}/drivers`, payload, headers);
 }
 
 export const updateDriverData = (id, payload, headers) => {
-  return async (dispatch) => {
-    try {
-      const results = await axios.put(`${process.env.REACT_APP_SERVER_URL}/drivers/${id}`, payload, headers);
-      dispatch({
-        type: 'UPDATE_DRIVER',
-        payload: results.data,
-      });
-    } catch (err) {
-      console.log(err);
-      const { message } = err;
-      dispatch({
-        type: 'UPDATE_DRIVER_MESSAGE',
-        payload: message,
-      });
-    }
-  };
+  return axios.put(`${process.env.REACT_APP_SERVER_URL}/drivers/${id}`, payload, headers);
 }

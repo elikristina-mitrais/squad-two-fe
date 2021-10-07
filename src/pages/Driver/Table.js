@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faCheck, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import { updateDriverStatus } from '../../store/actions/driver'
+import { updateDriverData } from '../../store/actions/driver'
 
 const { SearchBar } = Search
 
@@ -21,8 +21,21 @@ const handleStatus = (id) => {
           {
             label: 'Yes',
             onClick: () => {
-                updateDriverStatus(id)
-                window.location.reload()
+                const payload = {
+                    'driver': {        
+                        'status': 'Inactive'
+                    }
+                }
+                    
+                const headers = {
+                    'Content-Type': 'application/json',
+                }
+
+                updateDriverData(id, payload, headers).then(res => {
+                    if (res.status === 200 && res.data.error === 0) {
+                        window.location.reload()
+                    }
+                });
             }
           },
           {

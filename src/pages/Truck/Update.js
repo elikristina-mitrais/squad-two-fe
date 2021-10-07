@@ -26,20 +26,51 @@ class TruckUpdate extends Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
     const payload = {
-			'license_number': this.state.license_number,
-			'truck_type': this.state.truck_type,
-      'plate_type': this.state.plate_type,
-      'production_year': this.state.production_year,
-      'stnk_upload': this.state.stnk_upload,
-      'kir_upload': this.state.kir_upload
+      'truck': {
+        'license_number': (this.state.license_number === '') ? this.props.truck.license_number : this.state.license_number,
+        'truck_type': (this.state.truck_type === '') ? this.props.truck.truck_type : this.state.truck_type,
+        'plate_type': (this.state.plate_type === '') ? this.props.truck.plate_type : this.state.plate_type,
+        'production_year': (this.state.production_year === '') ? this.props.truck.production_year : this.state.production_year,
+        'stnk_upload': this.state.stnk_upload,
+        'kir_upload': this.state.kir_upload
+      }
 		}
 
     const headers = {
 			'Content-Type': 'application/json',
 		}
 
-    updateTruckData(this.props.match.params.id, payload, headers)
-    history.push('/trucks')
+    updateTruckData(this.props.match.params.id, payload, headers).then(res => {
+      if (res.status === 200 && res.data.error === 0) {
+        history.push('/trucks')
+      } else {
+        console.log('there error when update data')
+      }
+    })
+  }
+
+  handleFileRead = async(ev) => {
+    const file = ev.target.files[0]
+    const base64 = await this.convertBase64(file)
+
+    if (ev.target.name === 'stnk_upload') {
+      this.setState({stnk_upload: base64})
+    } else if (ev.target.name === 'kir_upload') {
+      this.setState({kir_upload: base64})
+    }
+  }
+
+  convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file)
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
   }
 
   render() {
@@ -113,8 +144,8 @@ class TruckUpdate extends Component {
                     name="stnk_upload"
                     type="file"
                     className="form-control"
-                    accept=".jpg,.jpeg,.png,.gif"
-                    onChange={e => this.setState({stnk_upload: e.target.value})} />
+                    inputProps={{ accept: 'image/*' }}
+                    onChange={e => this.handleFileRead(e)} />
                 </Col>
             </Form.Group>
             <Form.Group className="form-group row mt-3">
@@ -124,8 +155,8 @@ class TruckUpdate extends Component {
                     name="kir_upload"
                     type="file"
                     className="form-control"
-                    accept=".jpg,.jpeg,.png,.gif"
-                    onChange={e => this.setState({kir_upload: e.target.value})} />
+                    inputProps={{ accept: 'image/*' }}
+                    onChange={e => this.handleFileRead(e)} />
                 </Col>
             </Form.Group>
             <Row className="card-footer mt-3">

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faCheck, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import { updateTruckStatus } from '../../store/actions/truck'
+import { updateTruckData } from '../../store/actions/truck'
 
 const { SearchBar } = Search
 
@@ -21,8 +21,21 @@ const handleStatus = (id) => {
           {
             label: 'Yes',
             onClick: () => {
-                updateTruckStatus(id)
-                window.location.reload()
+                const payload = {
+                    'truck': {        
+                        'status': 'Inactive'
+                    }
+                }
+                    
+                const headers = {
+                    'Content-Type': 'application/json',
+                }
+
+                updateTruckData(id, payload, headers).then(res => {
+                    if (res.status === 200 && res.data.error === 0) {
+                        window.location.reload()
+                    }
+                });
             }
           },
           {
