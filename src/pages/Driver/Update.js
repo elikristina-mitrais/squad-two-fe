@@ -21,12 +21,17 @@ class DriverUpdate extends Component {
     this.props.getDriverDetail(this.props.match.params.id)
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({driver_name: props.driver.driver_name})
+    this.setState({phone_number: props.driver.phone_number})
+  }
+
   handleSubmit = (ev) => {
     ev.preventDefault();
     const payload = {
       'driver': {
-        'driver_name': (this.state.driver_name === '') ? this.props.driver.driver_name : this.state.driver_name,
-        'phone_number': (this.state.phone_number === '') ? this.props.driver.phone_number : this.state.phone_number,
+        'driver_name': this.state.driver_name,
+        'phone_number': this.state.phone_number,
         'ktp_upload': this.state.ktp_upload,
         'sim_upload': this.state.sim_upload
       }

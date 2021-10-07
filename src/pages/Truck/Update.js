@@ -23,14 +23,21 @@ class TruckUpdate extends Component {
     this.props.getTruckDetail(this.props.match.params.id)
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({license_number: props.truck.license_number})
+    this.setState({truck_type: props.truck.truck_type})
+    this.setState({plate_type: props.truck.plate_type})
+    this.setState({production_year: props.truck.production_year})
+  }
+
   handleSubmit = (ev) => {
     ev.preventDefault();
     const payload = {
       'truck': {
-        'license_number': (this.state.license_number === '') ? this.props.truck.license_number : this.state.license_number,
-        'truck_type': (this.state.truck_type === '') ? this.props.truck.truck_type : this.state.truck_type,
-        'plate_type': (this.state.plate_type === '') ? this.props.truck.plate_type : this.state.plate_type,
-        'production_year': (this.state.production_year === '') ? this.props.truck.production_year : this.state.production_year,
+        'license_number': this.state.license_number,
+        'truck_type': this.state.truck_type,
+        'plate_type': this.state.plate_type,
+        'production_year': this.state.production_year,
         'stnk_upload': this.state.stnk_upload,
         'kir_upload': this.state.kir_upload
       }
